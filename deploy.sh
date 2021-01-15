@@ -1,4 +1,10 @@
 #!/bin/bash
 set -e
 
-docker-compose up -d
+docker image prune -f
+
+docker-compose up -d rabbitMq
+
+sleep 10s
+
+docker-compose up -d payments
