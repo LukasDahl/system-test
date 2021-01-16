@@ -7,4 +7,4 @@ docker-compose up -d rabbitMq
 
 sleep 10s
 
-docker-compose up -d payments
+docker-compose up -d payments tokens accounts

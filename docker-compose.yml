@@ -17,3 +17,21 @@ services:
     container_name: payments
     ports:
      - "8010:8080"
+
+  tokens:
+    image: tokens
+    container_name: tokens
+    ports:
+     - "8020:8080"
+
+  accounts:
+    image: accounts
+    container_name: accounts
+    ports:
+     - "8030:8080"
+
+  # reports:
+  #   image: reports
+  #   container_name: reports
+  #   ports:
+  #    - "8040:8080"
