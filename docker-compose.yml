@@ -30,8 +30,8 @@ services:
     ports:
      - "8030:8080"
 
-  # reports:
-  #   image: reports
-  #   container_name: reports
-  #   ports:
-  #    - "8040:8080"
+  reports:
+    image: reports
+    container_name: reports
+    ports:
+     - "8040:8080"
