@@ -16,10 +16,10 @@ public class TestClient {
 
     public TestClient() {
 
-        paymentUrl = ClientBuilder.newClient().target("http://g-15.compute.dtu.dk:8010/");
-        tokenUrl = ClientBuilder.newClient().target("http://g-15.compute.dtu.dk:8020/");
-        accountUrl = ClientBuilder.newClient().target("http://g-15.compute.dtu.dk:8030/");
-        reportUrl = ClientBuilder.newClient().target("http://g-15.compute.dtu.dk:8040/");
+        paymentUrl = ClientBuilder.newClient().target("http://localhost:8010/");
+        tokenUrl = ClientBuilder.newClient().target("http://localhost:8020/");
+        accountUrl = ClientBuilder.newClient().target("http://localhost:8030/");
+        reportUrl = ClientBuilder.newClient().target("http://localhost:8040/");
 
     }
 
