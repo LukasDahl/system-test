@@ -4,12 +4,16 @@
 
 package simulators;
 
+import java.util.HashMap;
+
 import bankservice.Account;
 import bankservice.BankServiceException_Exception;
 import clients.AccountServiceClient;
 import clients.BankServiceClient;
 import clients.PaymentServiceClient;
+import clients.ReportServiceClient;
 import models.AccountType;
+import models.Transaction;
 
 public class MerchantApp {
 
@@ -19,12 +23,14 @@ public class MerchantApp {
     BankServiceClient bankServiceClient;
     PaymentServiceClient paymentServiceClient;
     AccountServiceClient accountServiceClient;
+    ReportServiceClient reportServiceClient;
 
     public MerchantApp(BankServiceClient bankServiceClient, PaymentServiceClient paymentServiceClient,
-            AccountServiceClient accountServiceClient) {
+            AccountServiceClient accountServiceClient, ReportServiceClient reportServiceClient) {
         this.bankServiceClient = bankServiceClient;
         this.paymentServiceClient = paymentServiceClient;
         this.accountServiceClient = accountServiceClient;
+        this.reportServiceClient = reportServiceClient;
     }
 
     public void createBankAccount(String firstName, String lastName, String CPR, String balance)
@@ -56,6 +62,11 @@ public class MerchantApp {
     public Account getBankAccount() throws BankServiceException_Exception {
         // for now always get the latest
         return this.bankAccount = this.bankServiceClient.getBankAccount(this.bankAccount.getId());
+    }
+    
+    public HashMap<String, Transaction> getReport(String clientType, String clientId, String startdate, String enddate) {
+    	
+    	return this.reportServiceClient.getReport(clientType, clientId, startdate, enddate);
     }
 
 }

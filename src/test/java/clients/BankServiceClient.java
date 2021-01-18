@@ -14,7 +14,7 @@ import bankservice.User;
 
 public class BankServiceClient {
 
-    BankService bankService = new BankServiceService().getBankServicePort();
+    public BankService bankService = new BankServiceService().getBankServicePort();
 
     public BankServiceClient() {
         bankService = new BankServiceService().getBankServicePort();

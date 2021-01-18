@@ -12,6 +12,7 @@ import bankservice.BankServiceException_Exception;
 import clients.AccountServiceClient;
 import clients.BankServiceClient;
 import clients.PaymentServiceClient;
+import clients.ReportServiceClient;
 import clients.TokenServiceClient;
 import io.cucumber.java.*;
 import io.cucumber.java.en.*;
@@ -30,14 +31,20 @@ public class DTUPayServiceSteps {
 		var tokenServiceClient = new TokenServiceClient();
 		var accountServiceClient = new AccountServiceClient();
 		var paymentServiceClient = new PaymentServiceClient();
+		var reportServiceClient = new ReportServiceClient();
 
-		this.customerApp = new CustomerApp(bankServiceClient, tokenServiceClient, accountServiceClient);
-		this.merchantApp = new MerchantApp(bankServiceClient, paymentServiceClient, accountServiceClient);
+		this.customerApp = new CustomerApp(bankServiceClient, tokenServiceClient,
+				accountServiceClient);
+		this.merchantApp = new MerchantApp(bankServiceClient, paymentServiceClient,
+				accountServiceClient, reportServiceClient);
 	}
+	
+	
 
 	@Given("a customer {string} {string} with CPR {string} is registered in the bank with amount {string}")
 	public void aCustomerIsRegisteredInTheBank(String firstName, String lastName, String CPR, String balance)
 			throws BankServiceException_Exception {
+		
 		this.customerApp.createBankAccount(firstName, lastName, CPR, balance);
 	}
 
@@ -82,6 +89,12 @@ public class DTUPayServiceSteps {
 	public void theBalanceOfTheMerchantAccountIs(String balance) throws BankServiceException_Exception {
 		var merchantAccount = this.merchantApp.getBankAccount();
 		assertEquals(new BigDecimal(balance), merchantAccount.getBalance());
+	}
+	
+	@And("the transaction is registered in the reports database")
+	public void theTransactionIsRegisteredInTheReportsDatabase() {
+		this.merchantApp.getReport("managers", "20", "0001-01-01", "9999-12-31");
+		
 	}
 
 	@After()
