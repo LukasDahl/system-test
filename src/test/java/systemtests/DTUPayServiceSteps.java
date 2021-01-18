@@ -13,10 +13,8 @@ import clients.AccountServiceClient;
 import clients.BankServiceClient;
 import clients.PaymentServiceClient;
 import clients.TokenServiceClient;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.*;
+import io.cucumber.java.en.*;
 import simulators.CustomerApp;
 import simulators.MerchantApp;
 
@@ -85,5 +83,12 @@ public class DTUPayServiceSteps {
 		var merchantAccount = this.merchantApp.getBankAccount();
 		assertEquals(new BigDecimal(balance), merchantAccount.getBalance());
 	}
+
+	@After()
+	public void deleteUsers() throws BankServiceException_Exception {
+		customerApp.deleteBankAccount();
+		merchantApp.deleteBankAccount();
+	}
+
 
 }

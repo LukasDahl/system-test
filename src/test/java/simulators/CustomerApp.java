@@ -17,7 +17,7 @@ public class CustomerApp {
 
     String id;
     Account bankAccount;
-    LinkedList<String> tokens;
+    LinkedList<String> tokens = new LinkedList<>();
 
     BankServiceClient bankServiceClient;
     TokenServiceClient tokenServiceClient;

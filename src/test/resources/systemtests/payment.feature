@@ -1,8 +1,8 @@
 Feature: DTUPay
 
 	Scenario: A payment is succesful in DTUPay
-		Given a customer "Margarete" "White" with CPR "111285-0569" is registered in the bank with amount "2000"
-		And a merchant "Ana" "Lewis" with CPR "190144-0324" is registered in the bank with amount "3000"
+		Given a customer "Margarete" "White" with CPR "111285-1569" is registered in the bank with amount "2000"
+		And a merchant "Ana" "Lewis" with CPR "190144-1324" is registered in the bank with amount "3000"
 		And the customer is registered in DTUPay
 		And the merchant is registered in DTUPay
 		And the customer has a least one token available
