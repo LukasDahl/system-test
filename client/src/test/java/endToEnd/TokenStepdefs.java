@@ -45,5 +45,6 @@ public class TokenStepdefs {
 
     @Then("the account is deleted")
     public void theAccountIsDeleted() {
+        client.deleteAccount();
     }
 }

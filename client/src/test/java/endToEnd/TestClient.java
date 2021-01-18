@@ -76,7 +76,7 @@ public class TestClient {
 
     }
 
-    public void deleteAccount(String id){
+    public void deleteAccount(){
         Response response = accountUrl.path("accounts/" + id).request().delete();
         if (response.getStatus() != 200){
             error = response.readEntity(String.class);
