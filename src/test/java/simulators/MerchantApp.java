@@ -4,8 +4,6 @@
 
 package simulators;
 
-
-
 import bankservice.Account;
 import bankservice.BankServiceException_Exception;
 import clients.AccountServiceClient;
@@ -13,7 +11,6 @@ import clients.BankServiceClient;
 import clients.PaymentServiceClient;
 import clients.ReportServiceClient;
 import models.AccountType;
-
 
 public class MerchantApp {
 
@@ -63,11 +60,11 @@ public class MerchantApp {
         // for now always get the latest
         return this.bankAccount = this.bankServiceClient.getBankAccount(this.bankAccount.getId());
     }
-    
-    //clientType = {merchants, managers}
+
+    // clientType = {merchants, managers}
     public boolean checkToken(String clientType, String clientId, String startdate, String enddate, String token) {
- 
-    	return this.reportServiceClient.checkToken(clientType, clientId, startdate, enddate, token);
+
+        return this.reportServiceClient.checkToken(clientType, clientId, startdate, enddate, token);
     }
 
 }

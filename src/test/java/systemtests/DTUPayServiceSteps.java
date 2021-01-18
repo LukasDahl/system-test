@@ -33,18 +33,16 @@ public class DTUPayServiceSteps {
 		var paymentServiceClient = new PaymentServiceClient();
 		var reportServiceClient = new ReportServiceClient();
 
-		this.customerApp = new CustomerApp(bankServiceClient, tokenServiceClient,
-				accountServiceClient, reportServiceClient);
-		this.merchantApp = new MerchantApp(bankServiceClient, paymentServiceClient,
-				accountServiceClient, reportServiceClient);
+		this.customerApp = new CustomerApp(bankServiceClient, tokenServiceClient, accountServiceClient,
+				reportServiceClient);
+		this.merchantApp = new MerchantApp(bankServiceClient, paymentServiceClient, accountServiceClient,
+				reportServiceClient);
 	}
-	
-	
 
 	@Given("a customer {string} {string} with CPR {string} is registered in the bank with amount {string}")
 	public void aCustomerIsRegisteredInTheBank(String firstName, String lastName, String CPR, String balance)
 			throws BankServiceException_Exception {
-		
+
 		this.customerApp.createBankAccount(firstName, lastName, CPR, balance);
 	}
 
@@ -90,10 +88,10 @@ public class DTUPayServiceSteps {
 		var merchantAccount = this.merchantApp.getBankAccount();
 		assertEquals(new BigDecimal(balance), merchantAccount.getBalance());
 	}
-	
+
 	@And("the transaction is registered in the reports database")
 	public void theTransactionIsRegisteredInTheReportsDatabase() {
-		
+
 		assertTrue(this.merchantApp.checkToken("managers", "20", "0001-01-01", "9999-12-31", this.token));
 	}
 
@@ -102,6 +100,5 @@ public class DTUPayServiceSteps {
 		customerApp.deleteBankAccount();
 		merchantApp.deleteBankAccount();
 	}
-
 
 }
