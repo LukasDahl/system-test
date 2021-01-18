@@ -37,13 +37,13 @@ public class DTUPayServiceSteps {
 		this.merchantApp = new MerchantApp(bankServiceClient, paymentServiceClient, accountServiceClient);
 	}
 
-	@Given("Given a customer {string} {string} with CPR {string} is registered in the bank with amount {string}")
+	@Given("a customer {string} {string} with CPR {string} is registered in the bank with amount {string}")
 	public void aCustomerIsRegisteredInTheBank(String firstName, String lastName, String CPR, String balance)
 			throws BankServiceException_Exception {
 		this.customerApp.createBankAccount(firstName, lastName, CPR, balance);
 	}
 
-	@And("Given a merchant {string} {string} with CPR {string} is registered in the bank with amount {string}")
+	@Given("a merchant {string} {string} with CPR {string} is registered in the bank with amount {string}")
 	public void aMerchantIsRegisteredInTheBank(String firstName, String lastName, String CPR, String balance)
 			throws BankServiceException_Exception {
 		this.merchantApp.createBankAccount(firstName, lastName, CPR, balance);
@@ -59,12 +59,12 @@ public class DTUPayServiceSteps {
 		this.merchantApp.registerInDTUPay();
 	}
 
-	@And("the customer has at least one token available")
+	@And("the customer has a least one token available")
 	public void theCustomerHasAtLeastOneTokenAvailable() {
 		this.token = this.customerApp.getToken();
 	}
 
-	@When("the merchant initiates a payment of {Double} kr. by the customer with description of {string}")
+	@When("the merchant initiates a payment of {double} kr. by the customer with description of {string}")
 	public void theMerchantInitiatesPaymentByTheCustomer(Double amount, String description) {
 		this.paymentResult = this.merchantApp.initiateMoneyTransfer(this.token, amount, description);
 	}
