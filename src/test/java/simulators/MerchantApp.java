@@ -4,7 +4,7 @@
 
 package simulators;
 
-import java.util.HashMap;
+
 
 import bankservice.Account;
 import bankservice.BankServiceException_Exception;
@@ -13,7 +13,7 @@ import clients.BankServiceClient;
 import clients.PaymentServiceClient;
 import clients.ReportServiceClient;
 import models.AccountType;
-import models.Transaction;
+
 
 public class MerchantApp {
 
@@ -64,9 +64,10 @@ public class MerchantApp {
         return this.bankAccount = this.bankServiceClient.getBankAccount(this.bankAccount.getId());
     }
     
-    public HashMap<String, Transaction> getReport(String clientType, String clientId, String startdate, String enddate) {
-    	
-    	return this.reportServiceClient.getReport(clientType, clientId, startdate, enddate);
+    //clientType = {merchants, managers}
+    public boolean checkToken(String clientType, String clientId, String startdate, String enddate, String token) {
+ 
+    	return this.reportServiceClient.checkToken(clientType, clientId, startdate, enddate, token);
     }
 
 }

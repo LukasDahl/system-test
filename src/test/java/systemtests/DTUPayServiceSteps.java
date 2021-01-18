@@ -34,7 +34,7 @@ public class DTUPayServiceSteps {
 		var reportServiceClient = new ReportServiceClient();
 
 		this.customerApp = new CustomerApp(bankServiceClient, tokenServiceClient,
-				accountServiceClient);
+				accountServiceClient, reportServiceClient);
 		this.merchantApp = new MerchantApp(bankServiceClient, paymentServiceClient,
 				accountServiceClient, reportServiceClient);
 	}
@@ -93,8 +93,8 @@ public class DTUPayServiceSteps {
 	
 	@And("the transaction is registered in the reports database")
 	public void theTransactionIsRegisteredInTheReportsDatabase() {
-		this.merchantApp.getReport("managers", "20", "0001-01-01", "9999-12-31");
 		
+		assertTrue(this.merchantApp.checkToken("managers", "20", "0001-01-01", "9999-12-31", this.token));
 	}
 
 	@After()

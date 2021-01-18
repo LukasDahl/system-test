@@ -4,14 +4,13 @@
 
 package clients;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import javax.json.JsonObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
+
 import io.cucumber.messages.internal.com.google.gson.Gson;
 import models.Transaction;
 
@@ -23,25 +22,21 @@ public class ReportServiceClient {
         baseUrl = client.target("http://localhost:8040/reports/");
     }
 
-    public HashMap<String, Transaction> getReport(String clientType, String clientId, String startdate, String enddate) {
-    	
+    public boolean checkToken(String clientType, String clientId, String startdate, String enddate, String token) {
     	
         Response response = baseUrl.path(clientType.toLowerCase()).queryParam("id", clientId)
         		.queryParam("start", startdate).queryParam("end", enddate).request().get();
         
+        List responseList = response.readEntity(List.class);
         
-        String response_string = response.readEntity(JsonObject.class).toString();
-        HashMap<String, Transaction> map = new Gson().fromJson(response_string, HashMap.class);
-  
-        Object[] mapArray = map.values().toArray();
-        
-        for (int i=0; i<mapArray.length; i++) {
-        	String tokenId = mapArray[i].toString().split(",")[6].substring(7).split("}")[0];
-        	System.out.println(tokenId);
+        for (Object trans: responseList) {
+        	String token_found = trans.toString().split(",")[6].split("=")[1].split("}")[0];
+        	System.out.println("token found: " + token_found + "       token to match: " + token);
+        	if (token_found.equals(token)) {
+        		return true;
+        	}
         }
         
-        
-
-        return map;
+        return false;
     }
 }

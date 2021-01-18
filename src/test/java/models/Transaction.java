@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Transaction {
-	private String Id;
-    private String Token;
-    private BigDecimal Amount;
-    private String MerchantId;
-    private String CustomerId;
-    private String Description;
-    private LocalDateTime Time;
+	private String id;
+    private String token;
+    private BigDecimal amount;
+    private String merchantId;
+    private String customerId;
+    private String description;
+    private LocalDateTime time;
     
     
     public Transaction () {
@@ -19,57 +19,57 @@ public class Transaction {
     
 	public Transaction(String id, String token, BigDecimal amount, String merchantId, String customerId,
 			String description, LocalDateTime time) {
-		Id = id;
-		Token = token;
-		Amount = amount;
-		MerchantId = merchantId;
-		CustomerId = customerId;
-		Description = description;
-		Time = time;
+		this.id = id;
+		this.token = token;
+		this.amount = amount;
+		this.merchantId = merchantId;
+		this.customerId = customerId;
+		this.description = description;
+		this.time = time;
 	}
 	
 	
 	public String getId() {
-		return Id;
+		return id;
 	}
 	public void setId(String id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getToken() {
-		return Token;
+		return token;
 	}
 	public void setToken(String token) {
-		Token = token;
+		this.token = token;
 	}
 	public BigDecimal getAmount() {
-		return Amount;
+		return amount;
 	}
 	public void setAmount(BigDecimal amount) {
-		Amount = amount;
+		this.amount = amount;
 	}
 	public String getMerchantId() {
-		return MerchantId;
+		return merchantId;
 	}
 	public void setMerchantId(String merchantId) {
-		MerchantId = merchantId;
+		this.merchantId = merchantId;
 	}
 	public String getCustomerId() {
-		return CustomerId;
+		return customerId;
 	}
 	public void setCustomerId(String customerId) {
-		CustomerId = customerId;
+		this.customerId = customerId;
 	}
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 	public LocalDateTime getTime() {
-		return Time;
+		return time;
 	}
 	public void setTime(LocalDateTime time) {
-		Time = time;
+		this.time = time;
 	}
 	
 	

@@ -10,6 +10,7 @@ import bankservice.Account;
 import bankservice.BankServiceException_Exception;
 import clients.AccountServiceClient;
 import clients.BankServiceClient;
+import clients.ReportServiceClient;
 import clients.TokenServiceClient;
 import models.AccountType;
 
@@ -22,12 +23,14 @@ public class CustomerApp {
     BankServiceClient bankServiceClient;
     TokenServiceClient tokenServiceClient;
     AccountServiceClient accountServiceClient;
+    ReportServiceClient reportServiceClient;
 
     public CustomerApp(BankServiceClient bankServiceClient, TokenServiceClient tokenServiceClient,
-            AccountServiceClient accountServiceClient) {
+            AccountServiceClient accountServiceClient, ReportServiceClient reportServiceClient) {
         this.bankServiceClient = bankServiceClient;
         this.tokenServiceClient = tokenServiceClient;
         this.accountServiceClient = accountServiceClient;
+        this.reportServiceClient = reportServiceClient;
     }
 
     public void createBankAccount(String firstName, String lastName, String CPR, String balance)
