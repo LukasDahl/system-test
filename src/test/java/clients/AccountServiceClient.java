@@ -14,6 +14,7 @@ import bankservice.Account;
 import models.AccountType;
 
 import javax.json.*;
+import javax.ws.rs.core.Response;
 
 public class AccountServiceClient {
     WebTarget baseUrl;
@@ -36,15 +37,16 @@ public class AccountServiceClient {
                 .add("bankAccountId", bankAccount.getId()).add("user", user);
         var account = accountBuild.build();
 
-        String response = baseUrl.path("accounts").request().post(Entity.entity(account, MediaType.APPLICATION_JSON))
-                .readEntity(String.class);
+        Response response = baseUrl.path("accounts").request().post(Entity.entity(account, MediaType.APPLICATION_JSON));
+        String id = response.readEntity(JsonObject.class).getString("id");
 
         // better change this @Jonatan and also you can return the account already so we
         // don't need to fetch it again
-        if (response.equals("user created")) {
-            // return "some-account-id";
+        if (response.getStatus() != 201) {
+            return null;
+
         }
 
-        return "some-account-id";
+        return id;
     }
 }
