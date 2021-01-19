@@ -108,12 +108,30 @@ public class DTUPayServiceSteps {
 	@And("the {string} can see the transaction from a get request")
 	public void the_can_see_the_transaction_from_a_get_request(String clientType) {
 		
+		String[] result;
 		
+		if (clientType.equals("merchant")) {
+			result = this.merchantApp.getTokenAndId(clientType+"s", this.merchantId,
+					"0001-01-01", "9999-12-31", this.token);
+		} else if (clientType.equals("customer")) {
+			result = this.customerApp.getTokenAndId(clientType+"s", this.customerId,
+					"0001-01-01", "9999-12-31", this.token);
+		} else {
+			result = this.merchantApp.getTokenAndId(clientType+"s", "manager",
+					"0001-01-01", "9999-12-31", this.token);
+		}
+		
+		assertTrue(this.token.equals(result[0]));
 		
 	}
 
 	@And("the customer is anonymous to the merchant")
 	public void the_customer_is_anonymous_to_the_merchant() {
+		
+		String[] result = this.merchantApp.getTokenAndId("merchants", this.merchantId,
+				"0001-01-01", "9999-12-31", this.token);
+		
+		assertTrue(result[2].equals("anonymous"));
 		
 	}
 

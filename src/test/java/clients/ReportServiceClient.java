@@ -47,6 +47,7 @@ public class ReportServiceClient {
         if (!tokenFound) {
         	result[0] = "not found";
         	result[1] = "not found";
+        	result[2] = "not found";
         }
         
         return result;

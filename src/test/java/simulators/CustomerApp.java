@@ -66,5 +66,10 @@ public class CustomerApp {
         }
         return this.tokens.removeFirst();
     }
+    
+    public String[] getTokenAndId(String clientType, String clientId, String startdate, String enddate, String token) {
+
+        return this.reportServiceClient.getTokenAndId(clientType, clientId, startdate, enddate, token);
+    }
 
 }
