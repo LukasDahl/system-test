@@ -9,6 +9,6 @@ sleep 25s
 
 docker-compose up -d payments tokens accounts reports
 
-sleep 4s
+sleep 20s
 
 mvn test
