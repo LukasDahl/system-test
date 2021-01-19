@@ -13,3 +13,7 @@ Scenario: Successful payment -> transaction added to report database
 		
 		#Addition to payments test
 		And the transaction is registered in the reports database
+		And the "customer" can see the transaction from a get request
+		And the "manager" can see the transaction from a get request
+		And the "merchant" can see the transaction from a get request
+		And the customer is anonymous to the merchant

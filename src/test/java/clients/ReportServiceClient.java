@@ -4,6 +4,7 @@
 
 package clients;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
@@ -22,21 +23,35 @@ public class ReportServiceClient {
         baseUrl = client.target("http://localhost:8040/reports/");
     }
 
-    public boolean checkToken(String clientType, String clientId, String startdate, String enddate, String token) {
+    public String[] getTokenAndId(String clientType, String clientId, String startdate, String enddate, String token) {
     	
         Response response = baseUrl.path(clientType.toLowerCase()).queryParam("id", clientId)
         		.queryParam("start", startdate).queryParam("end", enddate).request().get();
         
         List responseList = response.readEntity(List.class);
+        String[] result = new String[3];
+        boolean tokenFound = false;
         
         for (Object trans: responseList) {
         	String token_found = trans.toString().split(",")[6].split("=")[1].split("}")[0];
-        	System.out.println("token found: " + token_found + "       token to match: " + token);
+        	String mid_found = trans.toString().split(",")[1].split("=")[1].split("}")[0];
+        	String cid_found = trans.toString().split(",")[2].split("=")[1].split("}")[0];
         	if (token_found.equals(token)) {
-        		return true;
+        		result[0] = token_found;
+        		result[1] = mid_found;
+        		result[2] = cid_found;
+        		tokenFound = true;
         	}
         }
         
-        return false;
+        if (!tokenFound) {
+        	result[0] = "not found";
+        	result[1] = "not found";
+        }
+        
+        return result;
     }
+    
+    
+    
 }

@@ -62,9 +62,10 @@ public class MerchantApp {
     }
 
     // clientType = {merchants, managers}
-    public boolean checkToken(String clientType, String clientId, String startdate, String enddate, String token) {
+    public String[] getTokenAndId(String clientType, String clientId, String startdate, String enddate, String token) {
 
-        return this.reportServiceClient.checkToken(clientType, clientId, startdate, enddate, token);
+        return this.reportServiceClient.getTokenAndId(clientType, clientId, startdate, enddate, token);
     }
+    
 
 }

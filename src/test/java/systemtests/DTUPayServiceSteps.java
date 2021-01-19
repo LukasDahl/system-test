@@ -25,6 +25,8 @@ public class DTUPayServiceSteps {
 	Boolean paymentResult;
 	CustomerApp customerApp;
 	MerchantApp merchantApp;
+	String merchantId;
+	String customerId;
 
 	public DTUPayServiceSteps() {
 		var bankServiceClient = new BankServiceClient();
@@ -91,8 +93,28 @@ public class DTUPayServiceSteps {
 
 	@And("the transaction is registered in the reports database")
 	public void theTransactionIsRegisteredInTheReportsDatabase() {
+		
+		String[] result = this.merchantApp.getTokenAndId("managers", "manager",
+				"0001-01-01", "9999-12-31", this.token);
+		
+		if (this.token.equals(result[0])) {
+			this.merchantId = result[1];
+			this.customerId = result[2];
+		}
+		
+		assertTrue(this.token.equals(result[0]));
+	}
+	
+	@And("the {string} can see the transaction from a get request")
+	public void the_can_see_the_transaction_from_a_get_request(String clientType) {
+		
+		
+		
+	}
 
-		assertTrue(this.merchantApp.checkToken("managers", "20", "0001-01-01", "9999-12-31", this.token));
+	@And("the customer is anonymous to the merchant")
+	public void the_customer_is_anonymous_to_the_merchant() {
+		
 	}
 
 	@After()
